@@ -1,82 +1,82 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Дневник | Music Diary</title>
-  <link rel="stylesheet" href="../css/style.css" />
-</head>
-<body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <header class="sidebar-header">
-        <div class="logo">
-          <span class="logo-mark">♪</span>
-          <span class="logo-text">Music Diary</span>
-        </div>
-      </header>
-
-      <nav class="sidebar-nav" aria-label="Навигация по сайту">
-        <a href="../index.html" class="nav-link">Поиск</a>
-        <a href="collection.html" class="nav-link">Коллекция</a>
-        <a href="diary.html" class="nav-link active">Дневник</a>
-        <a href="memories.html" class="nav-link">Воспоминания</a>
-        <a href="stats.html" class="nav-link">Статистика</a>
-        <a href="profile.html" class="nav-link">Профиль</a>
-      </nav>
-    </aside>
-
-    <main class="main-panel">
-      <header class="page-header">
-        <h1>Дневник</h1>
-      </header>
-
-      <section class="content-block">
-        <form class="diary-form">
-          <div class="form-grid">
-            <div class="form-field">
-              <label for="track-name">Название трека</label>
-              <input id="track-name" type="text" placeholder="Например: Neon Skyline" />
-            </div>
-
-            <div class="form-field">
-              <label for="artist-name">Исполнитель</label>
-              <input id="artist-name" type="text" placeholder="Например: Static Rooms" />
-            </div>
-
-            <div class="form-field">
-              <label for="date-heard">Дата знакомства</label>
-              <input id="date-heard" type="date" />
-            </div>
-
-            <div class="form-field">
-              <label for="rating">Оценка</label>
-              <input id="rating" type="number" min="1" max="10" step="0.1" placeholder="9.4" />
-            </div>
-
-            <div class="form-field full-width">
-              <label for="emotion">Эмоциональный тег</label>
-              <select id="emotion">
-                <option value="">Выберите тег</option>
-                <option value="вдохновение">Вдохновение</option>
-                <option value="настроение">Настроение</option>
-                <option value="ностальгия">Ностальгия</option>
-                <option value="расслабление">Расслабление</option>
-              </select>
-            </div>
-
-            <div class="form-field full-width">
-              <label for="notes">Впечатления</label>
-              <textarea id="notes" rows="6" placeholder="Опишите, что вы почувствовали..."></textarea>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Дневник | Music Diary</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <header class="sidebar-header">
+          <div class="logo">
+            <span class="logo-mark">♪</span>
+            <span class="logo-text">Music Diary</span>
           </div>
+        </header>
 
-          <div class="form-actions">
-            <button type="submit" class="primary-button">Сохранить запись</button>
-          </div>
-        </form>
-      </section>
-    </main>
-  </div>
-</body>
+        <nav class="sidebar-nav" aria-label="Навигация по сайту">
+          <a href="../index.html" class="nav-link">Поиск</a>
+          <a href="collection.html" class="nav-link">Коллекция</a>
+          <a href="diary.html" class="nav-link active">Дневник</a>
+          <a href="memories.html" class="nav-link">Воспоминания</a>
+          <a href="stats.html" class="nav-link">Статистика</a>
+          <a href="profile.html" class="nav-link">Профиль</a>
+        </nav>
+      </aside>
+
+      <main class="main-panel">
+        <header class="page-header">
+          <h1>Дневник</h1>
+        </header>
+
+        <section class="content-block">
+          <form class="diary-form">
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="track-name">Название трека</label>
+                <input id="track-name" type="text" placeholder="Например: Neon Skyline" />
+              </div>
+
+              <div class="form-field">
+                <label for="artist-name">Исполнитель</label>
+                <input id="artist-name" type="text" placeholder="Например: Static Rooms" />
+              </div>
+
+              <div class="form-field">
+                <label for="date-heard">Дата знакомства</label>
+                <input id="date-heard" type="date" />
+              </div>
+
+              <div class="form-field">
+                <label for="rating">Оценка</label>
+                <input id="rating" type="number" min="1" max="10" step="0.1" placeholder="9.4" />
+              </div>
+
+              <div class="form-field full-width">
+                <label for="emotion">Эмоциональный тег</label>
+                <select id="emotion">
+                  <option value="">Выберите тег</option>
+                  <option value="вдохновение">Вдохновение</option>
+                  <option value="настроение">Настроение</option>
+                  <option value="ностальгия">Ностальгия</option>
+                  <option value="расслабление">Расслабление</option>
+                </select>
+              </div>
+
+              <div class="form-field full-width">
+                <label for="notes">Впечатления</label>
+                <textarea id="notes" rows="6" placeholder="Опишите, что вы почувствовали..."></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="primary-button">Сохранить запись</button>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </body>
 </html>
