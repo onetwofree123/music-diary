@@ -32,7 +32,7 @@
         </header>
 
         <section class="content-block">
-          <form class="diary-form">
+          <form id="diary-form" class="diary-form">
             <div class="form-grid">
               <div class="form-field">
                 <label for="track-name">Название трека</label>
@@ -75,8 +75,15 @@
               <button type="submit" class="primary-button">Сохранить запись</button>
             </div>
           </form>
+
+          <div class="saved-entries-wrapper">
+            <h2>Сохранённые записи</h2>
+            <div id="saved-entries" class="saved-entries"></div>
+          </div>
         </section>
       </main>
     </div>
+
+    <script src="../js/main.js"></script>
   </body>
 </html>

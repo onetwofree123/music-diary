@@ -32,61 +32,20 @@
         </header>
 
         <section class="content-block">
-          <div class="cards-grid">
-            <article class="track-card">
-              <div class="track-cover cover-1"></div>
-              <div class="track-body">
-                <span class="tag">Indie pop</span>
-                <h3>Midnight Echo</h3>
-                <p>Moonlight Avenue</p>
-                <div class="meta">
-                  <span>★ 9.4</span>
-                  <span>3:42</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="track-card">
-              <div class="track-cover cover-2"></div>
-              <div class="track-body">
-                <span class="tag">Dream pop</span>
-                <h3>Glass Horizon</h3>
-                <p>Velvet Noise</p>
-                <div class="meta">
-                  <span>★ 9.1</span>
-                  <span>4:08</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="track-card">
-              <div class="track-cover cover-3"></div>
-              <div class="track-body">
-                <span class="tag">Synthwave</span>
-                <h3>Neon Skyline</h3>
-                <p>Static Rooms</p>
-                <div class="meta">
-                  <span>★ 9.7</span>
-                  <span>3:56</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="track-card">
-              <div class="track-cover cover-4"></div>
-              <div class="track-body">
-                <span class="tag">Alternative</span>
-                <h3>Velvet Rain</h3>
-                <p>Night Bloom</p>
-                <div class="meta">
-                  <span>★ 8.9</span>
-                  <span>4:21</span>
-                </div>
-              </div>
-            </article>
+          <div class="toolbar">
+            <input
+              id="search-input"
+              class="search-input"
+              type="search"
+              placeholder="Поиск по названию или исполнителю"
+            />
           </div>
+
+          <div id="track-list" class="cards-grid"></div>
         </section>
       </main>
     </div>
+
+    <script src="../js/main.js"></script>
   </body>
 </html>

@@ -16,8 +16,11 @@
   --card-shadow: 0 10px 25px rgba(61, 92, 127, 0.08);
   --accent: #5f8ec9;
   --accent-dark: #3e628f;
+  --success: #5ca87d;
+  --danger: #d36f6f;
 }
 
+/* ===== Общие стили ===== */
 * {
   box-sizing: border-box;
 }
@@ -39,7 +42,15 @@ a {
   text-decoration: none;
 }
 
-button, input, select, textarea {
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
   font: inherit;
 }
 
@@ -48,6 +59,7 @@ button, input, select, textarea {
   min-height: 100vh;
 }
 
+/* ===== Сайдбар ===== */
 .sidebar {
   width: 300px;
   background: linear-gradient(180deg, var(--sidebar-bg) 0%, var(--sidebar-bg-deep) 100%);
@@ -115,6 +127,7 @@ button, input, select, textarea {
   opacity: 1;
 }
 
+/* ===== Основное содержимое ===== */
 .main-panel {
   flex: 1;
   padding: 40px 28px 36px;
@@ -136,6 +149,7 @@ button, input, select, textarea {
   padding: 24px;
 }
 
+/* ===== Главная страница ===== */
 .hero-block {
   min-height: 300px;
   display: flex;
@@ -163,8 +177,10 @@ button, input, select, textarea {
   margin-top: 12px;
 }
 
+/* ===== Кнопки ===== */
 .primary-button,
-.secondary-button {
+.secondary-button,
+.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -181,8 +197,10 @@ button, input, select, textarea {
 
 .primary-button:hover,
 .secondary-button:hover,
+.button:hover,
 .primary-button:focus,
-.secondary-button:focus {
+.secondary-button:focus,
+.button:focus {
   background: var(--button-blue-hover);
   transform: translateY(-1px);
   box-shadow: 0 8px 18px rgba(95, 142, 201, 0.18);
@@ -193,6 +211,7 @@ button, input, select, textarea {
   border: 1px solid var(--line);
 }
 
+/* ===== Карточки коллекции ===== */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -258,6 +277,7 @@ button, input, select, textarea {
   color: var(--main-text);
 }
 
+/* ===== Форма ===== */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -310,6 +330,7 @@ button, input, select, textarea {
   margin-top: 22px;
 }
 
+/* ===== Воспоминания ===== */
 .memory-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -356,6 +377,7 @@ button, input, select, textarea {
   line-height: 1.55;
 }
 
+/* ===== Статистика ===== */
 .stats-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -383,6 +405,7 @@ button, input, select, textarea {
   color: var(--main-text);
 }
 
+/* ===== Поиск ===== */
 .search-label {
   display: block;
   margin-bottom: 12px;
@@ -413,6 +436,68 @@ button, input, select, textarea {
   color: var(--muted-text);
 }
 
+.saved-entries-wrapper {
+  margin-top: 28px;
+}
+
+.saved-entries-wrapper h2 {
+  margin: 0 0 16px;
+  font-size: 1.4rem;
+}
+
+.saved-entries {
+  display: grid;
+  gap: 14px;
+}
+
+.saved-entry {
+  background: #f3f9ff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+
+.saved-entry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.saved-entry-header strong {
+  font-size: 1.1rem;
+}
+
+.saved-entry-header span {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--soft-blue-2);
+  color: var(--accent-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.saved-entry-meta {
+  color: var(--muted-text);
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.saved-entry p {
+  margin: 0;
+  color: var(--main-text);
+  line-height: 1.6;
+}
+
+.empty-message {
+  margin: 0;
+  color: var(--muted-text);
+}
+
+/* ===== Профиль ===== */
 .profile-card {
   display: flex;
   align-items: center;
@@ -450,6 +535,7 @@ button, input, select, textarea {
   margin-top: 8px;
 }
 
+/* ===== Медиазапросы ===== */
 @media (max-width: 860px) {
   .app-shell {
     flex-direction: column;
