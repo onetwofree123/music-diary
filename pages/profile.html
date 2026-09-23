@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Music Diary</title>
+  <title>Профиль | Music Diary</title>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
@@ -22,17 +22,51 @@
         <a href="diary.html" class="nav-link">Дневник</a>
         <a href="memories.html" class="nav-link">Воспоминания</a>
         <a href="stats.html" class="nav-link">Статистика</a>
-        <a href="profile.html" class="nav-link">Профиль</a>
+        <a href="profile.html" class="nav-link active">Профиль</a>
       </nav>
     </aside>
 
     <main class="main-panel">
       <header class="page-header">
-        <h1>Название страницы</h1>
+        <h1>Профиль</h1>
       </header>
 
       <section class="content-block">
-        <!-- уникальный контент страницы -->
+        <div class="profile-card">
+          <div class="avatar">A</div>
+          <div class="profile-meta">
+            <h2>Алина Петрова</h2>
+            <p>music.diary.user@example.com</p>
+          </div>
+        </div>
+
+        <form class="profile-form">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="name">Имя</label>
+              <input id="name" type="text" value="Алина" />
+            </div>
+
+            <div class="form-field">
+              <label for="email">E-mail</label>
+              <input id="email" type="email" value="music.diary.user@example.com" />
+            </div>
+
+            <div class="form-field">
+              <label for="password">Пароль</label>
+              <input id="password" type="password" value="password123" />
+            </div>
+
+            <div class="form-field">
+              <label for="city">Город</label>
+              <input id="city" type="text" value="Москва" />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="primary-button">Сохранить изменения</button>
+          </div>
+        </form>
       </section>
     </main>
   </div>

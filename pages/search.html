@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Music Diary</title>
+  <title>Поиск | Music Diary</title>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
@@ -28,11 +28,34 @@
 
     <main class="main-panel">
       <header class="page-header">
-        <h1>Название страницы</h1>
+        <h1>Поиск</h1>
       </header>
 
       <section class="content-block">
-        <!-- уникальный контент страницы -->
+        <label for="search-query" class="search-label">Введите запрос</label>
+        <input
+          id="search-query"
+          type="search"
+          class="search-input"
+          placeholder="Найдите трек, исполнителя или жанр"
+        />
+
+        <div class="search-results">
+          <article class="result-item">
+            <h3>Midnight Echo</h3>
+            <p>Moonlight Avenue · Indie pop</p>
+          </article>
+
+          <article class="result-item">
+            <h3>Glass Horizon</h3>
+            <p>Velvet Noise · Dream pop</p>
+          </article>
+
+          <article class="result-item">
+            <h3>Neon Skyline</h3>
+            <p>Static Rooms · Synthwave</p>
+          </article>
+        </div>
       </section>
     </main>
   </div>

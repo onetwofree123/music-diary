@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Music Diary</title>
+  <title>Воспоминания | Music Diary</title>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
@@ -20,7 +20,7 @@
         <a href="../index.html" class="nav-link">Поиск</a>
         <a href="collection.html" class="nav-link">Коллекция</a>
         <a href="diary.html" class="nav-link">Дневник</a>
-        <a href="memories.html" class="nav-link">Воспоминания</a>
+        <a href="memories.html" class="nav-link active">Воспоминания</a>
         <a href="stats.html" class="nav-link">Статистика</a>
         <a href="profile.html" class="nav-link">Профиль</a>
       </nav>
@@ -28,11 +28,38 @@
 
     <main class="main-panel">
       <header class="page-header">
-        <h1>Название страницы</h1>
+        <h1>Воспоминания</h1>
       </header>
 
       <section class="content-block">
-        <!-- уникальный контент страницы -->
+        <div class="memory-grid">
+          <article class="memory-card">
+            <div class="memory-image memory-one"></div>
+            <div class="memory-body">
+              <span class="memory-date">12 октября 2025</span>
+              <h3>Осенний вечер</h3>
+              <p>Слушал в метро, возвращаясь с лекции, и это сразу стало ассоциироваться с первым холодным ветром.</p>
+            </div>
+          </article>
+
+          <article class="memory-card">
+            <div class="memory-image memory-two"></div>
+            <div class="memory-body">
+              <span class="memory-date">2 марта 2026</span>
+              <h3>Сонный утренний кофе</h3>
+              <p>Песню включил на кухне, когда готовил завтрак. Она идеально подошла к спокойному началу дня.</p>
+            </div>
+          </article>
+
+          <article class="memory-card">
+            <div class="memory-image memory-three"></div>
+            <div class="memory-body">
+              <span class="memory-date">18 июня 2026</span>
+              <h3>Дорога домой</h3>
+              <p>Этот трек звучал в машине в дождливый вечер, и с тех пор напоминает ощущение лёгкой тревоги и мечты.</p>
+            </div>
+          </article>
+        </div>
       </section>
     </main>
   </div>
