@@ -78,9 +78,8 @@ function filterTracks(query) {
   if (!normalised) return tracks;
 
   return tracks.filter((track) =>
-    track.title.toLowerCase().includes(normalised) ||
-    track.artist.toLowerCase().includes(normalised) ||
-    track.genre.toLowerCase().includes(normalised)
+    [track.title, track.artist, track.genre]
+      .some((value) => value.toLowerCase().includes(normalised))
   );
 }
 
@@ -90,17 +89,18 @@ function getTrackPageUrl(track) {
   return `${prefix}track.html?id=${encodeURIComponent(track.id)}`;
 }
 
-function renderTrackCards(items, container = document.getElementById("track-list")) {
+function renderList(items, container, renderItem, emptyMessage) {
   if (!container) return;
 
-  if (!items.length) {
-    container.innerHTML = '<p class="empty-message">Ничего не найдено. Попробуйте другой запрос.</p>';
-    return;
-  }
+  container.innerHTML = items.length
+    ? items.map(renderItem).join("")
+    : `<p class="empty-message">${emptyMessage}</p>`;
+}
 
-  container.innerHTML = items.map((track, index) => `
+function renderTrackCards(items, container = document.getElementById("track-list")) {
+  renderList(items, container, (track) => `
     <a class="track-card" href="${getTrackPageUrl(track)}" aria-label="Открыть трек ${escapeHtml(track.title)}">
-      <div class="track-cover cover-${track.id || (index % 5) + 1}"></div>
+      <div class="track-cover cover-${track.id}"></div>
       <div class="track-body">
         <span class="tag">${escapeHtml(track.genre)}</span>
         <h3>${escapeHtml(track.title)}</h3>
@@ -111,25 +111,16 @@ function renderTrackCards(items, container = document.getElementById("track-list
         </div>
       </div>
     </a>
-  `).join("");
+  `, "Ничего не найдено. Попробуйте другой запрос.");
 }
 
 function renderGlobalSearchResults(items) {
-  const container = document.getElementById("global-search-results");
-
-  if (!container) return;
-
-  if (!items.length) {
-    container.innerHTML = '<p class="empty-message">Ничего не найдено.</p>';
-    return;
-  }
-
-  container.innerHTML = items.map((track) => `
+  renderList(items, document.getElementById("global-search-results"), (track) => `
     <a class="result-item" href="pages/track.html?id=${encodeURIComponent(track.id)}">
       <h3>${escapeHtml(track.title)}</h3>
       <p>${escapeHtml(track.artist)} · ${escapeHtml(track.genre)}</p>
     </a>
-  `).join("");
+  `, "Ничего не найдено.");
 }
 
 function renderTrackDetails() {
@@ -194,6 +185,20 @@ function formatDate(date) {
   return Number.isNaN(parsedDate.getTime())
     ? escapeHtml(date)
     : parsedDate.toLocaleDateString("ru-RU");
+}
+
+function getDiaryFields(form) {
+  return {
+    title: form.querySelector("#track-name"),
+    artist: form.querySelector("#artist-name"),
+    date: form.querySelector("#date-heard"),
+    rating: form.querySelector("#rating"),
+    emotion: form.querySelector("#emotion"),
+    notes: form.querySelector("#notes"),
+    memoryPlace: form.querySelector("#memory-place"),
+    memoryPhoto: form.querySelector("#memory-photo"),
+    memoryDescription: form.querySelector("#memory-description")
+  };
 }
 
 function renderDiaryEntries() {
@@ -261,24 +266,17 @@ function renderMemories() {
 }
 
 function validateDiaryForm(form) {
-  const trackName = form.querySelector("#track-name");
-  const artistName = form.querySelector("#artist-name");
-  const rating = form.querySelector("#rating");
-  const notes = form.querySelector("#notes");
-  const emotion = form.querySelector("#emotion");
-  const memoryPlace = form.querySelector("#memory-place");
-  const memoryDescription = form.querySelector("#memory-description");
-  const memoryPhoto = form.querySelector("#memory-photo");
+  const { title, artist, rating, emotion, notes, memoryPlace, memoryPhoto, memoryDescription } = getDiaryFields(form);
 
-  if (!trackName.value.trim()) {
+  if (!title.value.trim()) {
     alert("Введите название трека.");
-    trackName.focus();
+    title.focus();
     return false;
   }
 
-  if (!artistName.value.trim()) {
+  if (!artist.value.trim()) {
     alert("Введите имя исполнителя.");
-    artistName.focus();
+    artist.focus();
     return false;
   }
 
@@ -352,15 +350,16 @@ function resetDiaryEditing(form, submitButton, cancelButton) {
 }
 
 function startDiaryEditing(entry, form, submitButton, cancelButton) {
-  form.querySelector("#track-name").value = entry.title || "";
-  form.querySelector("#artist-name").value = entry.artist || "";
-  form.querySelector("#date-heard").value = entry.date || "";
-  form.querySelector("#rating").value = entry.rating || "";
-  form.querySelector("#emotion").value = entry.emotion || "";
-  form.querySelector("#notes").value = entry.notes || "";
-  form.querySelector("#memory-place").value = entry.memory?.place || "";
-  form.querySelector("#memory-description").value = entry.memory?.description || "";
-  form.querySelector("#memory-photo").value = "";
+  const fields = getDiaryFields(form);
+  fields.title.value = entry.title || "";
+  fields.artist.value = entry.artist || "";
+  fields.date.value = entry.date || "";
+  fields.rating.value = entry.rating || "";
+  fields.emotion.value = entry.emotion || "";
+  fields.notes.value = entry.notes || "";
+  fields.memoryPlace.value = entry.memory?.place || "";
+  fields.memoryDescription.value = entry.memory?.description || "";
+  fields.memoryPhoto.value = "";
   form.dataset.editingId = String(entry.id);
   submitButton.textContent = "Сохранить изменения";
   cancelButton.hidden = false;
@@ -399,7 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const popularTracks = document.getElementById("popular-tracks");
-  if (popularTracks) renderTrackCards(tracks.slice(0, 5), popularTracks);
+  if (popularTracks) renderTrackCards(tracks, popularTracks);
 
   renderDiaryEntries();
   renderMemories();
@@ -446,12 +445,13 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       if (!validateDiaryForm(diaryForm)) return;
 
-      const photoFile = diaryForm.querySelector("#memory-photo").files[0];
+      const fields = getDiaryFields(diaryForm);
+      const photoFile = fields.memoryPhoto.files[0];
       const oldEntries = getDiaryEntries();
       const editingId = diaryForm.dataset.editingId;
       const previousEntry = oldEntries.find((entry) => String(entry.id) === editingId);
-      const memoryPlace = diaryForm.querySelector("#memory-place").value.trim();
-      const memoryDescription = diaryForm.querySelector("#memory-description").value.trim();
+      const memoryPlace = fields.memoryPlace.value.trim();
+      const memoryDescription = fields.memoryDescription.value.trim();
       let photo = previousEntry?.memory?.photo || "";
 
       try {
@@ -464,12 +464,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const hasMemory = Boolean(memoryPlace && memoryDescription);
       const entry = {
         id: previousEntry ? previousEntry.id : Date.now(),
-        title: diaryForm.querySelector("#track-name").value.trim(),
-        artist: diaryForm.querySelector("#artist-name").value.trim(),
-        date: diaryForm.querySelector("#date-heard").value || new Date().toISOString().slice(0, 10),
-        rating: Number(diaryForm.querySelector("#rating").value),
-        emotion: diaryForm.querySelector("#emotion").value,
-        notes: diaryForm.querySelector("#notes").value.trim(),
+        title: fields.title.value.trim(),
+        artist: fields.artist.value.trim(),
+        date: fields.date.value || new Date().toISOString().slice(0, 10),
+        rating: Number(fields.rating.value),
+        emotion: fields.emotion.value,
+        notes: fields.notes.value.trim(),
         ...(hasMemory ? { memory: { place: memoryPlace, description: memoryDescription, photo } } : {})
       };
 

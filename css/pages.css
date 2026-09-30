@@ -1,0 +1,74 @@
+.hero-block { display: flex; min-height: 300px; flex-direction: column; justify-content: center; }
+.lead { margin: 0 0 10px; color: var(--muted); font-size: 1.15rem; }
+.hero-text { margin: 0 0 20px; font-size: 1.2rem; line-height: 1.6; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; }
+.global-search { max-width: 720px; margin-bottom: 8px; }
+.popular-section { margin-top: 34px; }
+.popular-section h2 { margin: 0 0 18px; font-size: 1.55rem; }
+.popular-section .track-card { min-width: 0; }
+
+.saved-entries-wrapper { margin-top: 30px; }
+.saved-entries-toggle {
+  display: flex;
+  width: 100%;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--text);
+  background: rgba(10, 10, 10, 0.38);
+  text-align: left;
+  font-weight: 700;
+  cursor: pointer;
+}
+.saved-entries-toggle:hover, .saved-entries-toggle:focus-visible { background: rgba(83, 104, 120, 0.62); }
+.saved-entry-count { display: grid; min-width: 28px; height: 28px; place-items: center; border-radius: 50%; background: var(--steel); font-size: 0.85rem; }
+.saved-entries-panel { padding-top: 14px; }
+.entry-actions, .form-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.entry-actions { margin-top: 16px; }
+.entry-actions .secondary-button, .entry-actions .delete-button { min-height: 38px; padding: 8px 14px; border-radius: 10px; font-size: 0.88rem; }
+.delete-button { border: 1px solid rgba(231, 137, 137, 0.38); border-radius: 10px; color: #ffe5e5; background: rgba(130, 49, 49, 0.62); cursor: pointer; }
+.delete-button:hover, .delete-button:focus-visible { background: rgba(166, 59, 59, 0.82); }
+.entry-memory-link { margin-top: 10px !important; color: #dce5e9 !important; font-size: 0.9rem; }
+.memory-fields { min-width: 0; margin: 4px 0 0; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: rgba(10, 10, 10, 0.2); }
+.memory-fields legend { padding: 0 8px; color: var(--text); font-weight: 700; }
+.memory-fields .form-grid { margin-top: 6px; }
+.field-hint { color: var(--muted); font-size: 0.8rem; line-height: 1.45; }
+
+.track-page-header { margin-bottom: 24px; }
+.track-page-header h1 { margin: 18px 0 6px; }
+.back-link { display: inline-flex; min-height: 36px; align-items: center; color: rgba(245, 243, 239, 0.78); font-weight: 600; }
+.back-link:hover, .back-link:focus-visible { color: white; }
+.track-page-artist, .track-detail-artist { margin: 0; color: var(--muted); font-size: 1.1rem; }
+.track-detail-content { max-width: 1100px; margin: 0 auto; }
+.track-artwork {
+  position: relative;
+  display: grid;
+  height: min(54vh, 560px);
+  min-height: 340px;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+}
+.track-artwork::before, .track-artwork::after { position: absolute; z-index: -1; content: ""; pointer-events: none; }
+.track-artwork::before { width: min(62vw, 620px); aspect-ratio: 1; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 50%; box-shadow: 0 0 0 32px rgba(255, 255, 255, 0.035), 0 0 0 90px rgba(255, 255, 255, 0.025), inset 0 0 80px rgba(0, 0, 0, 0.2); transform: translate(28%, 18%); }
+.track-artwork::after { inset: 0; background: radial-gradient(ellipse at 20% 15%, rgba(255, 255, 255, 0.2), transparent 36%), linear-gradient(135deg, transparent 35%, rgba(0, 0, 0, 0.32)); }
+.track-artwork.cover-1 { background: radial-gradient(ellipse at 72% 24%, #c89470, transparent 34%), linear-gradient(135deg, #322a36, #78606b 54%, #20262e); }
+.track-artwork.cover-2 { background: radial-gradient(ellipse at 24% 72%, #c5a6c7, transparent 38%), linear-gradient(135deg, #27263c, #536878 58%, #a6b2b3); }
+.track-artwork.cover-3 { background: radial-gradient(ellipse at 72% 32%, #e27858, transparent 30%), linear-gradient(135deg, #101922, #234653 52%, #a74e47); }
+.track-artwork.cover-4 { background: radial-gradient(ellipse at 25% 28%, #d3aa87, transparent 35%), linear-gradient(135deg, #3a302e, #76645e 54%, #202629); }
+.track-artwork.cover-5 { background: radial-gradient(ellipse at 68% 65%, #a9c6ba, transparent 32%), linear-gradient(135deg, #15252a, #536878 55%, #b6b6a9); }
+.artwork-mark { color: rgba(255, 255, 255, 0.88); font-size: 10rem; line-height: 1; text-shadow: 0 12px 45px rgba(0, 0, 0, 0.32); }
+.track-details { padding: 30px 4px 12px; }
+.track-detail-heading h2 { margin: 8px 0 4px; font-size: 2rem; }
+.track-description { max-width: 760px; margin: 20px 0 26px; color: rgba(245, 243, 239, 0.88); line-height: 1.7; }
+.track-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--line); }
+.track-facts div { min-width: 0; padding: 16px; background: rgba(10, 10, 10, 0.38); }
+.track-facts dt { margin-bottom: 6px; color: var(--muted); font-size: 0.82rem; }
+.track-facts dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
