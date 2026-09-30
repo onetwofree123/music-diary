@@ -17,7 +17,7 @@
         </header>
 
         <nav class="sidebar-nav" aria-label="Навигация по сайту">
-          <a href="pages/search.html" class="nav-link">Поиск</a>
+          <a href="index.html" class="nav-link active">Главная</a>
           <a href="pages/collection.html" class="nav-link">Коллекция</a>
           <a href="pages/diary.html" class="nav-link">Дневник</a>
           <a href="pages/memories.html" class="nav-link">Воспоминания</a>
@@ -32,6 +32,16 @@
         </header>
 
         <section class="content-block hero-block">
+          <label for="global-search" class="search-label">Найти трек</label>
+          <input
+            id="global-search"
+            class="search-input global-search"
+            type="search"
+            placeholder="Название трека, исполнитель или жанр"
+            autocomplete="off"
+          />
+          <div id="global-search-results" class="search-results" aria-live="polite"></div>
+
           <p class="lead">Личный музыкальный дневник</p>
           <p class="hero-text">
             Сохраняйте любимые треки, фиксируйте эмоции от прослушивания,
@@ -43,7 +53,13 @@
             <a href="pages/diary.html" class="secondary-button">Добавить запись</a>
           </div>
         </section>
+
+        <section class="popular-section" aria-labelledby="popular-heading">
+          <h2 id="popular-heading">Популярные треки</h2>
+          <div id="popular-tracks" class="cards-grid"></div>
+        </section>
       </main>
     </div>
+    <script src="js/main.js"></script>
   </body>
 </html>

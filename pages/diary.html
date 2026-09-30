@@ -17,7 +17,7 @@
         </header>
 
         <nav class="sidebar-nav" aria-label="Навигация по сайту">
-          <a href="../index.html" class="nav-link">Поиск</a>
+          <a href="../index.html" class="nav-link">Главная</a>
           <a href="collection.html" class="nav-link">Коллекция</a>
           <a href="diary.html" class="nav-link active">Дневник</a>
           <a href="memories.html" class="nav-link">Воспоминания</a>
@@ -69,16 +69,41 @@
                 <label for="notes">Впечатления</label>
                 <textarea id="notes" rows="6" placeholder="Опишите, что вы почувствовали..."></textarea>
               </div>
+
+              <fieldset class="memory-fields form-field full-width">
+                <legend>Воспоминание (необязательно)</legend>
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label for="memory-place">Место или событие</label>
+                    <input id="memory-place" type="text" placeholder="Например: поездка в Аршан" />
+                  </div>
+                  <div class="form-field">
+                    <label for="memory-photo">Фотография</label>
+                    <input id="memory-photo" type="file" accept="image/*" />
+                    <small class="field-hint">Изображение будет сохранено в браузере вместе с записью.</small>
+                  </div>
+                  <div class="form-field full-width">
+                    <label for="memory-description">Описание воспоминания</label>
+                    <textarea id="memory-description" rows="4" placeholder="Опишите событие и связь с треком..."></textarea>
+                  </div>
+                </div>
+              </fieldset>
             </div>
 
             <div class="form-actions">
               <button type="submit" class="primary-button">Сохранить запись</button>
+              <button id="cancel-edit" type="button" class="secondary-button" hidden>Отменить редактирование</button>
             </div>
           </form>
 
           <div class="saved-entries-wrapper">
-            <h2>Сохранённые записи</h2>
-            <div id="saved-entries" class="saved-entries"></div>
+            <button id="toggle-saved-entries" class="saved-entries-toggle" type="button" aria-expanded="false" aria-controls="saved-entries-panel">
+              <span>Сохранённые записи</span>
+              <span id="saved-entry-count" class="saved-entry-count">0</span>
+            </button>
+            <div id="saved-entries-panel" class="saved-entries-panel" hidden>
+              <div id="saved-entries" class="saved-entries"></div>
+            </div>
           </div>
         </section>
       </main>

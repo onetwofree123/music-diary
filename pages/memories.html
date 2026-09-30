@@ -17,7 +17,7 @@
         </header>
 
         <nav class="sidebar-nav" aria-label="Навигация по сайту">
-          <a href="../index.html" class="nav-link">Поиск</a>
+          <a href="../index.html" class="nav-link">Главная</a>
           <a href="collection.html" class="nav-link">Коллекция</a>
           <a href="diary.html" class="nav-link">Дневник</a>
           <a href="memories.html" class="nav-link active">Воспоминания</a>
@@ -32,36 +32,10 @@
         </header>
 
         <section class="content-block">
-          <div class="memory-grid">
-            <article class="memory-card">
-              <div class="memory-image memory-one"></div>
-              <div class="memory-body">
-                <span class="memory-date">12 мая 2025</span>
-                <h3>Песня для долгой дороги</h3>
-                <p>Эта композиция звучала в машине, когда мы ехали в закат и говорили о будущем.</p>
-              </div>
-            </article>
-
-            <article class="memory-card">
-              <div class="memory-image memory-two"></div>
-              <div class="memory-body">
-                <span class="memory-date">3 июня 2025</span>
-                <h3>Утро в квартире</h3>
-                <p>Трек включили на кухне, и весь день стал чуть теплее и добрее.</p>
-              </div>
-            </article>
-
-            <article class="memory-card">
-              <div class="memory-image memory-three"></div>
-              <div class="memory-body">
-                <span class="memory-date">19 июля 2025</span>
-                <h3>Первый концерт</h3>
-                <p>После выступления этот трек остался в голове на целую неделю и стал символом события.</p>
-              </div>
-            </article>
-          </div>
+          <div id="memory-list" class="memory-grid" aria-live="polite"></div>
         </section>
       </main>
     </div>
+    <script src="../js/main.js"></script>
   </body>
 </html>
