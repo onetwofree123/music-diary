@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Трек | Music Diary</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <header class="sidebar-header">
+          <div class="logo">
+            <span class="logo-mark">♪</span>
+            <span class="logo-text">Music Diary</span>
+          </div>
+        </header>
+
+        <nav class="sidebar-nav" aria-label="Навигация по сайту">
+          <a href="../index.html" class="nav-link">Главная</a>
+          <a href="collection.html" class="nav-link">Коллекция</a>
+          <a href="diary.html" class="nav-link">Дневник</a>
+          <a href="memories.html" class="nav-link">Воспоминания</a>
+          <a href="stats.html" class="nav-link">Статистика</a>
+          <a href="profile.html" class="nav-link">Профиль</a>
+        </nav>
+      </aside>
+
+      <main class="main-panel track-detail-panel">
+        <header class="page-header track-page-header">
+          <a href="collection.html" class="back-link">← Коллекция</a>
+          <h1 id="track-page-title">Трек</h1>
+          <p id="track-page-artist" class="track-page-artist"></p>
+        </header>
+
+        <section class="track-detail-content" aria-label="Информация о треке">
+          <div id="track-artwork" class="track-artwork cover-1" role="img" aria-label="Обложка трека">
+            <span class="artwork-mark" aria-hidden="true">♪</span>
+          </div>
+          <div id="track-details" class="track-details"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+  </body>
+</html>

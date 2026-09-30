@@ -925,3 +925,200 @@ body {
     padding: 14px;
   }
 }
+
+/* ===== Страница трека ===== */
+.track-detail-panel {
+  overflow: hidden;
+}
+
+.track-page-header {
+  margin-bottom: 24px;
+}
+
+.track-page-header h1 {
+  margin: 18px 0 6px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  color: rgba(245, 243, 239, 0.78);
+  font-weight: 600;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  color: #fff;
+  transform: translateX(-3px);
+}
+
+.track-page-artist {
+  margin: 0;
+  color: var(--muted-text);
+  font-size: 1.1rem;
+}
+
+.track-detail-content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.track-artwork {
+  position: relative;
+  min-height: 340px;
+  height: min(54vh, 560px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(229, 228, 226, 0.24);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+}
+
+.track-artwork::before,
+.track-artwork::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+}
+
+.track-artwork::before {
+  width: min(62vw, 620px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 32px rgba(255, 255, 255, 0.035),
+    0 0 0 90px rgba(255, 255, 255, 0.025),
+    inset 0 0 80px rgba(0, 0, 0, 0.2);
+  transform: translate(28%, 18%);
+}
+
+.track-artwork::after {
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 15%, rgba(255, 255, 255, 0.2), transparent 36%),
+    linear-gradient(135deg, transparent 35%, rgba(0, 0, 0, 0.32));
+}
+
+.track-artwork.cover-1 {
+  background: radial-gradient(ellipse at 72% 24%, #c89470, transparent 34%), linear-gradient(135deg, #322a36, #78606b 54%, #20262e);
+}
+
+.track-artwork.cover-2 {
+  background: radial-gradient(ellipse at 24% 72%, #c5a6c7, transparent 38%), linear-gradient(135deg, #27263c, #536878 58%, #a6b2b3);
+}
+
+.track-artwork.cover-3 {
+  background: radial-gradient(ellipse at 72% 32%, #e27858, transparent 30%), linear-gradient(135deg, #101922, #234653 52%, #a74e47);
+}
+
+.track-artwork.cover-4 {
+  background: radial-gradient(ellipse at 25% 28%, #d3aa87, transparent 35%), linear-gradient(135deg, #3a302e, #76645e 54%, #202629);
+}
+
+.track-artwork.cover-5 {
+  background: radial-gradient(ellipse at 68% 65%, #a9c6ba, transparent 32%), linear-gradient(135deg, #15252a, #536878 55%, #b6b6a9);
+}
+
+.artwork-mark {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(5rem, 15vw, 12rem);
+  line-height: 1;
+  text-shadow: 0 12px 45px rgba(0, 0, 0, 0.32);
+}
+
+.track-details {
+  padding: 30px 4px 12px;
+}
+
+.track-detail-heading h2 {
+  margin: 8px 0 4px;
+  color: var(--main-text);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+}
+
+.track-detail-artist {
+  margin: 0;
+  color: var(--muted-text);
+  font-size: 1.1rem;
+}
+
+.track-description {
+  max-width: 760px;
+  margin: 20px 0 26px;
+  color: rgba(245, 243, 239, 0.88);
+  line-height: 1.7;
+}
+
+.track-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(229, 228, 226, 0.2);
+  border-radius: 16px;
+  background: rgba(229, 228, 226, 0.15);
+}
+
+.track-facts div {
+  min-width: 0;
+  padding: 16px;
+  background: rgba(10, 10, 10, 0.38);
+}
+
+.track-facts dt {
+  margin-bottom: 6px;
+  color: var(--muted-text);
+  font-size: 0.82rem;
+}
+
+.track-facts dd {
+  margin: 0;
+  color: var(--main-text);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.track-card {
+  display: block;
+  color: inherit;
+}
+
+.track-card:focus-visible,
+.result-item:focus-visible {
+  outline: 2px solid #e5e4e2;
+  outline-offset: 4px;
+}
+
+.result-item {
+  display: block;
+  color: inherit;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.result-item:hover {
+  background: rgba(83, 104, 120, 0.72);
+  transform: translateX(3px);
+}
+
+@media (max-width: 860px) {
+  .track-detail-panel {
+    padding: 22px 16px;
+  }
+
+  .track-artwork {
+    min-height: 280px;
+    height: 48vh;
+    border-radius: 18px;
+  }
+
+  .track-details {
+    padding-top: 24px;
+  }
+}

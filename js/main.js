@@ -5,7 +5,10 @@ const tracks = [
     artist: "Moonlight Avenue",
     genre: "Indie pop",
     rating: 9.4,
-    duration: "3:42"
+    duration: "3:42",
+    album: "After the Blue Hour",
+    releaseDate: "2024-03-15",
+    description: "Мягкий инди-поп о тихих улицах, ночных огнях и мыслях, которые приходят после полуночи."
   },
   {
     id: 2,
@@ -13,7 +16,10 @@ const tracks = [
     artist: "Velvet Noise",
     genre: "Dream pop",
     rating: 9.1,
-    duration: "4:08"
+    duration: "4:08",
+    album: "Glass Gardens",
+    releaseDate: "2023-11-02",
+    description: "Воздушные синтезаторы и многослойный вокал создают ощущение сна на границе яви."
   },
   {
     id: 3,
@@ -21,7 +27,10 @@ const tracks = [
     artist: "Static Rooms",
     genre: "Synthwave",
     rating: 9.7,
-    duration: "3:56"
+    duration: "3:56",
+    album: "City After Dark",
+    releaseDate: "2025-01-24",
+    description: "Неоновый синтвейв о движении по ночному городу и поиске своего маршрута."
   },
   {
     id: 4,
@@ -29,7 +38,10 @@ const tracks = [
     artist: "Night Bloom",
     genre: "Alternative",
     rating: 8.9,
-    duration: "4:21"
+    duration: "4:21",
+    album: "Soft Weather",
+    releaseDate: "2022-08-19",
+    description: "Альтернативная баллада с выразительной гитарой и спокойным, почти кинематографичным настроением."
   },
   {
     id: 5,
@@ -37,7 +49,10 @@ const tracks = [
     artist: "Quiet Signal",
     genre: "Ambient",
     rating: 9.0,
-    duration: "5:04"
+    duration: "5:04",
+    album: "Small Frequencies",
+    releaseDate: "2024-06-07",
+    description: "Неспешная эмбиент-композиция, построенная на тёплых текстурах и длинных паузах."
   }
 ];
 
@@ -69,6 +84,12 @@ function filterTracks(query) {
   );
 }
 
+function getTrackPageUrl(track) {
+  const pagesDirectory = window.location.pathname.includes("/pages/");
+  const prefix = pagesDirectory ? "" : "pages/";
+  return `${prefix}track.html?id=${encodeURIComponent(track.id)}`;
+}
+
 function renderTrackCards(items, container = document.getElementById("track-list")) {
   if (!container) return;
 
@@ -78,8 +99,8 @@ function renderTrackCards(items, container = document.getElementById("track-list
   }
 
   container.innerHTML = items.map((track, index) => `
-    <article class="track-card">
-      <div class="track-cover cover-${(index % 4) + 1}"></div>
+    <a class="track-card" href="${getTrackPageUrl(track)}" aria-label="Открыть трек ${escapeHtml(track.title)}">
+      <div class="track-cover cover-${track.id || (index % 5) + 1}"></div>
       <div class="track-body">
         <span class="tag">${escapeHtml(track.genre)}</span>
         <h3>${escapeHtml(track.title)}</h3>
@@ -89,7 +110,7 @@ function renderTrackCards(items, container = document.getElementById("track-list
           <span>${escapeHtml(track.duration)}</span>
         </div>
       </div>
-    </article>
+    </a>
   `).join("");
 }
 
@@ -104,11 +125,46 @@ function renderGlobalSearchResults(items) {
   }
 
   container.innerHTML = items.map((track) => `
-    <article class="result-item">
+    <a class="result-item" href="pages/track.html?id=${encodeURIComponent(track.id)}">
       <h3>${escapeHtml(track.title)}</h3>
       <p>${escapeHtml(track.artist)} · ${escapeHtml(track.genre)}</p>
-    </article>
+    </a>
   `).join("");
+}
+
+function renderTrackDetails() {
+  const detailContainer = document.getElementById("track-details");
+
+  if (!detailContainer) return;
+
+  const trackId = new URLSearchParams(window.location.search).get("id");
+  const track = tracks.find((item) => String(item.id) === trackId);
+
+  if (!track) {
+    detailContainer.innerHTML = '<p class="empty-message">Трек не найден. Вернитесь в коллекцию и выберите другой.</p>';
+    return;
+  }
+
+  document.title = `${track.title} | Music Diary`;
+  document.getElementById("track-page-title").textContent = track.title;
+  document.getElementById("track-page-artist").textContent = track.artist;
+  document.getElementById("track-artwork").className = `track-artwork cover-${track.id}`;
+  document.getElementById("track-artwork").setAttribute("aria-label", `Обложка трека ${track.title}`);
+  detailContainer.innerHTML = `
+    <div class="track-detail-heading">
+      <span class="tag">${escapeHtml(track.genre)}</span>
+      <h2>${escapeHtml(track.title)}</h2>
+      <p class="track-detail-artist">${escapeHtml(track.artist)}</p>
+    </div>
+    <p class="track-description">${escapeHtml(track.description)}</p>
+    <dl class="track-facts">
+      <div><dt>Альбом</dt><dd>${escapeHtml(track.album)}</dd></div>
+      <div><dt>Дата выхода</dt><dd>${formatDate(track.releaseDate)}</dd></div>
+      <div><dt>Жанр</dt><dd>${escapeHtml(track.genre)}</dd></div>
+      <div><dt>Длительность</dt><dd>${escapeHtml(track.duration)}</dd></div>
+      <div><dt>Оценка</dt><dd>★ ${escapeHtml(track.rating)} / 10</dd></div>
+    </dl>
+  `;
 }
 
 function getDiaryEntries() {
@@ -320,6 +376,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const savedEntriesPanel = document.getElementById("saved-entries-panel");
   const submitButton = diaryForm?.querySelector('button[type="submit"]');
   const cancelButton = document.getElementById("cancel-edit");
+
+  renderTrackDetails();
 
   if (collectionSearch) {
     collectionSearch.addEventListener("input", (event) => {
