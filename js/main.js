@@ -1,58 +1,63 @@
 const tracks = [
   {
     id: 1,
-    title: "Midnight Echo",
-    artist: "Moonlight Avenue",
-    genre: "Indie pop",
+    title: "The Night We Met",
+    artist: "Lord Huron",
+    genre: ["Indie Folk", "Indie Rock"],
+    cover: "assets/images/night-we-met.jpg",
     rating: 9.4,
-    duration: "3:42",
-    album: "After the Blue Hour",
-    releaseDate: "2024-03-15",
-    description: "Мягкий инди-поп о тихих улицах, ночных огнях и мыслях, которые приходят после полуночи."
+    duration: "3:28",
+    album: "Strange Trails",
+    releaseDate: "2015-05-07",
+    description: "Лирическая композиция о сожалении и желании вернуться в прошлое, чтобы изменить потерянные отношения."
   },
   {
     id: 2,
-    title: "Glass Horizon",
-    artist: "Velvet Noise",
-    genre: "Dream pop",
+    title: "Bring Me to Life",
+    artist: "Evanescence",
+    genre: ["Alternative Metal", "Nu Metal", "Gothic Rock"],
+    cover: "assets/images/bring-me-to-life.jpg",
     rating: 9.1,
-    duration: "4:08",
-    album: "Glass Gardens",
-    releaseDate: "2023-11-02",
-    description: "Воздушные синтезаторы и многослойный вокал создают ощущение сна на границе яви."
+    duration: "3:56",
+    album: "Fallen",
+    releaseDate: "2003-05-22",
+    description: "Один из самых известных хитов Evanescence о духовном пробуждении и возвращении к жизни после эмоциональной пустоты."
   },
   {
     id: 3,
-    title: "Neon Skyline",
-    artist: "Static Rooms",
-    genre: "Synthwave",
+    title: "My Disaster",
+    artist: "Seether",
+    genre: ["Hard Rock", "Alternative Metal"],
+    cover: "assets/images/my-disaster.jpg",
     rating: 9.7,
-    duration: "3:56",
-    album: "City After Dark",
-    releaseDate: "2025-01-24",
-    description: "Неоновый синтвейв о движении по ночному городу и поиске своего маршрута."
+    duration: "4:32",
+    album: "Isolate And Medicate (Deluxe Edition)",
+    releaseDate: "2014-07-01",
+    description: "Мрачная баллада о разрушительных отношениях, где любовь переплетается с болью."
   },
   {
     id: 4,
-    title: "Velvet Rain",
-    artist: "Night Bloom",
-    genre: "Alternative",
+    title: "Whispers in the Dark",
+    artist: "Skillet",
+    genre: ["Christian Rock", "Alternative Metal"],
+    cover: "assets/images/whispers-in-the-dark.jpg",
     rating: 8.9,
-    duration: "4:21",
-    album: "Soft Weather",
-    releaseDate: "2022-08-19",
-    description: "Альтернативная баллада с выразительной гитарой и спокойным, почти кинематографичным настроением."
+    duration: "3:24",
+    album: "Comatose",
+    releaseDate: "2006-10-03",
+    description: "Динамичный трек о надежде и внутренней поддержке даже в самые тёмные моменты жизни."
   },
   {
     id: 5,
-    title: "Silver Memory",
-    artist: "Quiet Signal",
-    genre: "Ambient",
+    title: "Courtesy Call",
+    artist: "Thousand Foot Krutch",
+    genre: ["Alternative Rock", "Rap Rock"],
+    cover: "assets/images/courtesy-call.jpg",
     rating: 9.0,
-    duration: "5:04",
-    album: "Small Frequencies",
-    releaseDate: "2024-06-07",
-    description: "Неспешная эмбиент-композиция, построенная на тёплых текстурах и длинных паузах."
+    duration: "3:56",
+    album: "The End Is Where We Begin",
+    releaseDate: "2012-05-17",
+    description: "Энергичная композиция с мощным мотивирующим посылом о решимости, уверенности и готовности действовать."
   }
 ];
 
@@ -72,13 +77,17 @@ function escapeHtml(value = "") {
   });
 }
 
+function formatGenres(genres) {
+  return Array.isArray(genres) ? genres.join(", ") : String(genres);
+}
+
 function filterTracks(query) {
   const normalised = query.trim().toLowerCase();
 
   if (!normalised) return tracks;
 
   return tracks.filter((track) =>
-    [track.title, track.artist, track.genre]
+    [track.title, track.artist, ...track.genre]
       .some((value) => value.toLowerCase().includes(normalised))
   );
 }
@@ -87,6 +96,12 @@ function getTrackPageUrl(track) {
   const pagesDirectory = window.location.pathname.includes("/pages/");
   const prefix = pagesDirectory ? "" : "pages/";
   return `${prefix}track.html?id=${encodeURIComponent(track.id)}`;
+}
+
+function getCoverUrl(cover) {
+  const pagesDirectory = window.location.pathname.includes("/pages/");
+  const prefix = pagesDirectory ? "../" : "";
+  return `${prefix}${cover}`;
 }
 
 function renderList(items, container, renderItem, emptyMessage) {
@@ -100,9 +115,11 @@ function renderList(items, container, renderItem, emptyMessage) {
 function renderTrackCards(items, container = document.getElementById("track-list")) {
   renderList(items, container, (track) => `
     <a class="track-card" href="${getTrackPageUrl(track)}" aria-label="Открыть трек ${escapeHtml(track.title)}">
-      <div class="track-cover cover-${track.id}"></div>
+      <div class="track-cover cover-${track.id}">
+        <img class="cover-image" src="${escapeHtml(getCoverUrl(track.cover))}" alt="Обложка ${escapeHtml(track.title)}">
+      </div>
       <div class="track-body">
-        <span class="tag">${escapeHtml(track.genre)}</span>
+        <span class="tag">${escapeHtml(formatGenres(track.genre))}</span>
         <h3>${escapeHtml(track.title)}</h3>
         <p>${escapeHtml(track.artist)}</p>
         <div class="meta">
@@ -118,7 +135,7 @@ function renderGlobalSearchResults(items) {
   renderList(items, document.getElementById("global-search-results"), (track) => `
     <a class="result-item" href="pages/track.html?id=${encodeURIComponent(track.id)}">
       <h3>${escapeHtml(track.title)}</h3>
-      <p>${escapeHtml(track.artist)} · ${escapeHtml(track.genre)}</p>
+      <p>${escapeHtml(track.artist)} · ${escapeHtml(formatGenres(track.genre))}</p>
     </a>
   `, "Ничего не найдено.");
 }
@@ -139,11 +156,17 @@ function renderTrackDetails() {
   document.title = `${track.title} | Music Diary`;
   document.getElementById("track-page-title").textContent = track.title;
   document.getElementById("track-page-artist").textContent = track.artist;
-  document.getElementById("track-artwork").className = `track-artwork cover-${track.id}`;
-  document.getElementById("track-artwork").setAttribute("aria-label", `Обложка трека ${track.title}`);
+
+  const artwork = document.getElementById("track-artwork");
+  artwork.className = `track-artwork cover-${track.id}`;
+  artwork.setAttribute("aria-label", `Обложка трека ${track.title}`);
+  artwork.innerHTML = `
+    <img class="cover-image" src="${escapeHtml(getCoverUrl(track.cover))}" alt="Обложка ${escapeHtml(track.title)}">
+  `;
+
   detailContainer.innerHTML = `
     <div class="track-detail-heading">
-      <span class="tag">${escapeHtml(track.genre)}</span>
+      <span class="tag">${escapeHtml(formatGenres(track.genre))}</span>
       <h2>${escapeHtml(track.title)}</h2>
       <p class="track-detail-artist">${escapeHtml(track.artist)}</p>
     </div>
@@ -151,7 +174,7 @@ function renderTrackDetails() {
     <dl class="track-facts">
       <div><dt>Альбом</dt><dd>${escapeHtml(track.album)}</dd></div>
       <div><dt>Дата выхода</dt><dd>${formatDate(track.releaseDate)}</dd></div>
-      <div><dt>Жанр</dt><dd>${escapeHtml(track.genre)}</dd></div>
+      <div><dt>Жанр</dt><dd>${escapeHtml(formatGenres(track.genre))}</dd></div>
       <div><dt>Длительность</dt><dd>${escapeHtml(track.duration)}</dd></div>
       <div><dt>Оценка</dt><dd>★ ${escapeHtml(track.rating)} / 10</dd></div>
     </dl>
